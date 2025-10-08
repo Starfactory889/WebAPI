@@ -30,7 +30,8 @@ start_ts = int(datetime.datetime.strptime(Zeitraum_b, "%Y-%m-%d").timestamp())
 end_ts = int(datetime.datetime.strptime(Zeitraum_e, "%Y-%m-%d").timestamp())
 
 graph_url = f"https://api.coingecko.com/api/v3/coins/{coin}/market_chart/range?vs_currency=eur&from={start_ts}&to={end_ts}&precision=full&interval=daily&x_cg_demo_api_key=CG-kGgB4jzBXM8qNe4is6PitM4f"
-
+# https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from=2025-09-01&to=2025-09-30&precision=full&x_cg_demo_api_key=CG-kGgB4jzBXM8qNe4is6PitM4f
+response = requests.get(graph_url)
 data = response.json()   # JSON in Python-Daten umwandeln
 print(data)
 
