@@ -1,5 +1,6 @@
 import requests
 import plotly.express as px
+import plotly.express as px
 import datetime
 import tkinter as tk
 from tkinter import ttk, messagebox
