@@ -3,6 +3,7 @@ import plotly.express as px
 import datetime
 import tkinter as tk
 from tkinter import ttk, messagebox
+from PIL import Image, ImageTk
 
 # Funktion zum Abrufen der Top 100 Coins von CoinGecko
 def get_top_coins():
@@ -69,34 +70,52 @@ def fetch_data():
     else:
         messagebox.showerror("Fehler", "Fehler beim Abrufen der Marktdaten.")
 
-# GUI erstellen
+#GUI erstellen
+ 
+
+# Hauptfenster
 root = tk.Tk()
 root.title("Crypto Preisdiagramm")
+root.geometry("1360x765")
 
+# ==== Hintergrundbild einfügen ====
+image_path = r"C:\Users\johan\OneDrive - HTL Anichstrasse\HTL\2025,2026\Fsst\Json\WebAPI\webinar-bitcoin-ethereum-weihnachten-660.jpg"
+bg_image = Image.open(image_path)
+bg_image = bg_image.resize((1360,765))  # passt sich der Fenstergröße an
+bg_photo = ImageTk.PhotoImage(bg_image)
+
+background_label = tk.Label(root, image=bg_photo)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+# ==== Eingabeelemente ====
 coin_var = tk.StringVar()
 start_date_var = tk.StringVar()
 end_date_var = tk.StringVar()
 
-# Coins abrufen
 available_coins, coin_map = get_top_coins()
 
-coin_label = ttk.Label(root, text="Wähle einen Coin:")
-coin_label.pack(pady=5)
+# Widgets über dem Hintergrund
+coin_label = ttk.Label(root, text="Wähle einen Coin:", background="lightblue")
+coin_label.place(x=600, y=150)
 
 coin_combobox = ttk.Combobox(root, textvariable=coin_var, values=available_coins, width=40)
-coin_combobox.pack()
+coin_combobox.place(x=600, y=180)
 
-start_date_label = ttk.Label(root, text="Zeitraum Beginn (YYYY-MM-DD):")
-start_date_label.pack(pady=5)
+start_date_label = ttk.Label(root, text="Zeitraum Beginn (YYYY-MM-DD):", background="lightblue")
+start_date_label.place(x=600, y=210)
 start_date_entry = ttk.Entry(root, textvariable=start_date_var)
-start_date_entry.pack()
+start_date_entry.place(x=600, y=240)
 
-end_date_label = ttk.Label(root, text="Zeitraum Ende (YYYY-MM-DD):")
-end_date_label.pack(pady=5)
+end_date_label = ttk.Label(root, text="Zeitraum Ende (YYYY-MM-DD):", background="lightblue")
+end_date_label.place(x=600, y=270)
 end_date_entry = ttk.Entry(root, textvariable=end_date_var)
-end_date_entry.pack()
+end_date_entry.place(x=600, y=300)
+
+
 
 fetch_button = ttk.Button(root, text="Daten Abrufen und Diagramm Anzeigen", command=fetch_data)
-fetch_button.pack(pady=10)
+fetch_button.place(x=600, y=330)
+
+root.mainloop()
 
 root.mainloop()

@@ -1,1 +1,1 @@
-coin_map
+fetch_data
