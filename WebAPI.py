@@ -13,7 +13,7 @@ def get_top_coins():
         data = response.json() #wandelt json datei in liste um
         coins = []
         coin_map = {}
-        print(data)
+        
 
         for item in data: #nimmt die Daten der json/List und wiest diese einzelnen variablen zu 
             coin_id = item["id"] 
@@ -51,7 +51,7 @@ def fetch_data():
 
     if response.status_code == 200: #gleich wie oben 
         data = response.json() #umwandeln in dictionary 
-        print(data)
+        
         prices = data.get("prices", []) #holt sich den wert beim keywort prices, und speichert diesen in eine liste 
         #prices aufbau: [[Zeitstempel in ms,Wert in eur],...]
 
@@ -65,7 +65,6 @@ def fetch_data():
         df = {"Timestamp": timestamps, "Price": values} #variable für darstellung 
 
         fig = px.line(df, x="Timestamp", y="Price", title=f"{coin_name} Preisentwicklung (EUR)") #darstellung Diagramm 
-        print(fig)
         fig.show()
     else:
         messagebox.showerror("Fehler", "Fehler beim Abrufen der Marktdaten.")
